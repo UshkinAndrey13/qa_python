@@ -2,7 +2,6 @@ import pytest
 from main import BooksCollector
 
 
-
 @pytest.fixture
 def books_collector():
     collector = BooksCollector()
@@ -22,13 +21,9 @@ class TestBooksCollector:
 
         assert len(collector.get_books_rating()) == 2
 
-# напиши свои тесты ниже
-# чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
 
+    def test_add_new_book_twice(self):
 
-class TestBooksCollector1:
-
-    def test_cannot_add_new_book_twice(self):
         collector = BooksCollector()
 
         collector.add_new_book('Трудно быть богом')
@@ -37,9 +32,9 @@ class TestBooksCollector1:
         assert collector.books_rating == {'Трудно быть богом': 1}
 
 
-class TestBooksCollector2:
 
     def test_add_rating_to_absent_book_fails(self):
+
         collector = BooksCollector()
 
         collector.add_new_book('Трудно быть богом')
@@ -48,9 +43,9 @@ class TestBooksCollector2:
         assert collector.books_rating == {'Трудно быть богом': 1}
 
 
-class TestBooksCollector3:
 
-    def test_cannot_set_rating_less_than_one(self):
+    def test_set_rating_less_than_one_fails(self):
+
         collector = BooksCollector()
 
         collector.add_new_book('Трудно быть богом')
@@ -59,9 +54,9 @@ class TestBooksCollector3:
         assert collector.books_rating == {'Трудно быть богом': 1}
 
 
-class TestBooksCollector4:
 
-    def test_cannot_set_rating_higher_than_ten(self):
+    def test_set_rating_higher_than_ten_fails(self):
+
         collector = BooksCollector()
 
         collector.add_new_book('Трудно быть богом')
@@ -70,9 +65,9 @@ class TestBooksCollector4:
         assert collector.books_rating == {'Трудно быть богом': 1}
 
 
-class TestBooksCollector5:
 
     def test_absent_book_has_no_rating(self):
+
         collector = BooksCollector()
 
         collector.add_new_book('Трудно быть богом')
@@ -81,18 +76,18 @@ class TestBooksCollector5:
         assert rating is None
 
 
-class TestBooksCollector6:
 
     def test_add_to_favorites(self, books_collector):
+
         books_collector.add_new_book('Трудно быть богом')
         books_collector.add_book_in_favorites('Трудно быть богом')
 
         assert books_collector.favorites == ['Трудно быть богом']
 
 
-class TestBooksCollector7:
 
-    def test_cannot_add_to_favorites_if_not_in_ratings(self):
+    def test_add_to_favorites_if_not_in_ratings_fails(self):
+
         collector = BooksCollector()
 
         collector.add_book_in_favorites('Трудно быть богом')
@@ -101,9 +96,8 @@ class TestBooksCollector7:
         assert collector.books_rating == {}
 
 
-class TestBooksCollector8:
-
     def test_delete_from_favorites(self, books_collector):
+
         books_collector.add_new_book('Трудно быть богом')
         books_collector.add_book_in_favorites('Трудно быть богом')
         books_collector.delete_book_from_favorites('Трудно быть богом')
@@ -111,7 +105,6 @@ class TestBooksCollector8:
         assert books_collector.favorites == []
 
 
-class TestBooksCollector9:
 
     def test_get_list_of_favorites_books(self, books_collector):
         books_collector.add_new_book('Трудно быть богом')
